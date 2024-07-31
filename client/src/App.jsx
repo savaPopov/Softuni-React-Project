@@ -1,3 +1,4 @@
+import Form from "./components/form/Form"
 import Header from "./components/header/Header"
 
 
@@ -6,15 +7,15 @@ function App() {
 
 
   return (
-    <>
-      <body class="is-preload">
-        <div id="wrapper">
-          {/* Header */}
-          <Header />
-          
-        </div>
-      </body>
-    </>
+
+
+    <div id="wrapper">
+      {/* Header */}
+      <Header />
+      <Form />
+    </div>
+
+
   )
 }
 
