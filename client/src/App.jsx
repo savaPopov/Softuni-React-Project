@@ -1,12 +1,19 @@
+import Header from "./components/header/Header"
 
 
 
 function App() {
- 
+
 
   return (
     <>
-      <h2>HELLO</h2>
+      <body class="is-preload">
+        <div id="wrapper">
+          {/* Header */}
+          <Header />
+          
+        </div>
+      </body>
     </>
   )
 }
