@@ -15,6 +15,7 @@ export default function Header() {
           <li>
             <Link to="/catalog">Catalog</Link>
           </li>
+          
           {isAuthenticated
             ? (<>
               <li><Link to="/logout">Logout</Link></li>
@@ -25,6 +26,7 @@ export default function Header() {
               <li><Link to="/login">Login</Link></li>
             </>)
             }
+
           <li>
             <a href="#">About Us</a>
           </li>

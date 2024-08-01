@@ -1,10 +1,10 @@
-// import { getAccessToken } from "../util.js/authUtils"
+import { getAccessToken } from "../util.js"
 
 export default async function requester(method, url, data) {
   const options = {}
 
-  // const accessToken = getAccessToken()
-  const accessToken = ''
+  const accessToken = getAccessToken()
+  // const accessToken = ''
 
   if (accessToken) {
     options.headers = {
