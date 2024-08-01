@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
+import { useAuthContext } from "../../contexts/AuthContext"
 
 export default function Header() {
   console.log('sava')
 
+  const { isAuthenticated } = useAuthContext()
   return (
     <header id="header">
       <h1>
@@ -13,21 +15,23 @@ export default function Header() {
           <li>
             <Link to="/catalog">Catalog</Link>
           </li>
+          {isAuthenticated
+            ? (<>
+              <li><Link to="/logout">Logout</Link></li>
+              <li><a href="#">Create Hike!</a></li>
+            </>)
+            : (<>
+              <li><Link to="/register">Register</Link></li>
+              <li><Link to="/login">Login</Link></li>
+            </>)
+            }
           <li>
             <a href="#">About Us</a>
           </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/logout">Logout</Link>
-          </li>
-          <li>
-            <a href="#">Create Hike!</a>
-          </li>
+
+
+
+
         </ul>
       </nav>
       <nav className="main">
