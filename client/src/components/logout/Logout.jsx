@@ -8,5 +8,5 @@ export default function Logout() {
   logout()
 
 
-  return <Navigate to='/' />
+  return <Navigate to='/catalog' />
 }

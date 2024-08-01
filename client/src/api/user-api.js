@@ -15,5 +15,5 @@ export async function register(email, password) {
 }
 
 export async function logout() {
-  await api.get(`${BASE_URL}/logout`)
+   api.get(`${BASE_URL}/logout`)
 }

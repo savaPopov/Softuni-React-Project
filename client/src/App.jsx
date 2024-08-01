@@ -13,6 +13,7 @@ import Register from "./components/register/Register"
 import Login from "./components/login/Login"
 import { AuthContextProvider } from "./contexts/AuthContext"
 import Logout from "./components/logout/Logout"
+import Details from "./components/details/Details"
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/details/:hikeId" element={<Details />} />
 
         </Routes>
         {/* <Form /> */}
