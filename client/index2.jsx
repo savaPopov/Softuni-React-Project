@@ -1,45 +1,4 @@
 <>
-  {/* Header */}
-  <header id="header">
-    <h1>
-      <a href="index.html">Home</a>
-    </h1>
-    <nav className="links">
-      <ul>
-        <li>
-          <a href="#" />
-        </li>
-        <li>
-          <a href="#">Catalog</a>
-        </li>
-        <li>
-          <a href="#">Create</a>
-        </li>
-        <li>
-          <a href="#">Login</a>
-        </li>
-        <li>
-          <a href="#">Register</a>
-        </li>
-        <li>
-          <a href="#">Logout</a>
-        </li>
-      </ul>
-    </nav>
-    {/* <nav class="main">
-							<ul>
-								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
-									</form>
-								</li>
-								<li class="menu">
-									<a class="fa-bars" href="#menu">Menu</a>
-								</li>
-							</ul>
-						</nav> */}
-  </header>
   {/* Menu */}
   <section id="menu">
     {/* Search */}
