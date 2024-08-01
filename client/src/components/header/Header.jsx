@@ -1,25 +1,29 @@
+import { Link } from "react-router-dom"
+
 export default function Header() {
+  console.log('sava')
+
   return (
     <header id="header">
       <h1>
-        <a href="index.html">Future Imperfect</a>
+        <Link to="/">Hiking Fun!</Link>
       </h1>
       <nav className="links">
         <ul>
           <li>
-            <a href="#">Lorem</a>
+            <Link to="/catalog">Catalog</Link>
           </li>
           <li>
-            <a href="#">Ipsum</a>
+            <a href="#">About Us</a>
           </li>
           <li>
-            <a href="#">Feugiat</a>
+            <a href="#">Login</a>
           </li>
           <li>
-            <a href="#">Tempus</a>
+            <a href="#">Register</a>
           </li>
           <li>
-            <a href="#">Adipiscing</a>
+            <a href="#">Create Hike!</a>
           </li>
         </ul>
       </nav>

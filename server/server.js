@@ -1339,6 +1339,30 @@
     	}
     };
     var seedData = {
+        hikes: {
+            '85e3404c-ff67-4885-a0e5-7fef294341e9': {
+                _ownerId: "593fb915-5b91-4368-b528-7e6aada1842d",
+                title: "Ivan Vazov",
+                elavation: "1200",
+                distance: "12",
+                imageUrl: "https://tripsjournal.com/wp-content/uploads/2020/07/hija-ivan-vazov-4-1.jpg",
+                mountain:'Rila',
+                description: "A pretty easy route and in the end you can see the 7 lakes of Rila",
+                _createdOn: 1722433336826,
+                _id: "85e3404c-ff67-4885-a0e5-7fef294341e9"
+            },
+            'fa57e73a-8ff6-4113-a882-e1c7e7ed2543': {
+                _ownerId: "593fb915-5b91-4368-b528-7e6aada1842d",
+                title: "Dobrila",
+                elavation: "1500",
+                distance: "23",
+                imageUrl: "https://www.bg-guide.org/thumbs/1130x636/accommodation/hija-dobrila_1130x636_crop_c234565a6f.jpg",
+                mountain:'Stara Planina',
+                description: "Medium difficulty bring raincoat with you",
+                _createdOn: 1625184000000,
+                _id: "fa57e73a-8ff6-4113-a882-e1c7e7ed2543"
+            }
+        },
     	recipes: {
     		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
     			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
