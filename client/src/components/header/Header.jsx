@@ -17,10 +17,13 @@ export default function Header() {
             <a href="#">About Us</a>
           </li>
           <li>
-            <a href="#">Login</a>
+            <Link to="/login">Login</Link>
           </li>
           <li>
-            <a href="#">Register</a>
+            <Link to="/register">Register</Link>
+          </li>
+          <li>
+            <Link to="/logout">Logout</Link>
           </li>
           <li>
             <a href="#">Create Hike!</a>

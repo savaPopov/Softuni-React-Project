@@ -1,7 +1,7 @@
 import About from "./components/about/About"
 import Catalog from "./components/catalog/Catalog"
 import Footer from "./components/footer/Footer"
-import Form from "./components/form/Form"
+
 import Header from "./components/header/Header"
 
 
@@ -9,33 +9,30 @@ import Menu from "./components/menu/Menu"
 import Home from "./components/home/Home"
 
 import { Routes, Route } from "react-router-dom"
+import Register from "./components/register/Register"
+import Login from "./components/login/Login"
+import { AuthContextProvider } from "./contexts/AuthContext"
 
 function App() {
 
 
   return (
 
+    <AuthContextProvider>
+      <div id="wrapper">
+        <Header />
+        {/* Header */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-    <div id="wrapper">
-      <Header />
-      {/* Header */}
-      <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/catalog" element={<Catalog />} />
+        </Routes>
+        {/* <Form /> */}
+      </div>
 
-        {/* <About/> */}
-        {/* <Catalog /> */}
-        {/* <Home/> */}
-        {/* <Menu/> */}
-        {/* <Footer/> */}
-      </Routes>
-      {/* <Form /> */}
-      
-
-
-    </div>
-
-
+    </AuthContextProvider>
   )
 }
 
