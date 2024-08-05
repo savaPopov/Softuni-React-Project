@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { getById } from "../../api/data-api"
 import { useEffect, useState } from "react"
 import { convertTime } from "../../util"
+import GoogleMaps from "./googleMaps/GoogleMaps"
 
 
 export default function Details() {
@@ -53,6 +54,7 @@ export default function Details() {
         <p>
           Distance:{hike.distance}hours
         </p>
+
         <footer>
           <ul className="stats">
             <li>
@@ -70,6 +72,7 @@ export default function Details() {
             </li>
           </ul>
         </footer>
+        {<GoogleMaps {...hike} />}
       </article>
     </div>
   )
