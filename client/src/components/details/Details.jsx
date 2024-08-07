@@ -3,6 +3,7 @@ import { getById } from "../../api/data-api"
 import { useEffect, useState } from "react"
 import { convertTime } from "../../util"
 import GoogleMaps from "./googleMaps/GoogleMaps"
+import styles from './Details.module.css'
 
 
 export default function Details() {
@@ -54,9 +55,61 @@ export default function Details() {
         <p>
           Distance:{hike.distance}hours
         </p>
+        <div className="buttons">
+          <h1 ><a className={styles.buttonLink} href="">Edit</a></h1>
+          <h1><a className={styles.buttonLink} href="">Delete</a></h1>
+          <h1><a className={styles.buttonLink} href="#">Like</a></h1>
+        </div>
+
+        <div className="details-comments">
+          <h2>Comments:</h2>
+
+          <ul>
+
+
+            <li className="comment">
+              <p>admin@abv.bg: Nice Hike</p>
+            </li>
+
+            <li className="comment">
+              <p>admin@abv.bg: Nice Hike</p>
+            </li>
+
+            <li className="comment">
+              <p>admin@abv.bg: Nice Hike</p>
+            </li>
+
+            {/* list all comments for current game (If any) */}
+
+          </ul>
+          {/* Display paragraph: If there are no games in the database */}
+          {/* {comments.length == 0 && <p className="no-comment">No comments.</p>} */}
+        </div>
+
+        <label>Add new comment:</label>
+
+        <form className="form" >
+
+          <textarea
+            name="comment"
+            placeholder="Comment......"
+
+          />
+
+          <input
+            className="btn submit"
+            type="submit"
+            defaultValue="Add Comment"
+          />
+
+        </form>
+
+
+
 
         <footer>
-          <ul className="stats">
+          {<GoogleMaps {...hike} />}
+          {/* <ul className="stats">
             <li>
               <a href="#">General</a>
             </li>
@@ -70,9 +123,9 @@ export default function Details() {
                 128
               </a>
             </li>
-          </ul>
+          </ul> */}
         </footer>
-        {<GoogleMaps {...hike} />}
+
       </article>
     </div>
   )

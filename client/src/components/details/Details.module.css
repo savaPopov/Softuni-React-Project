@@ -1,0 +1,17 @@
+.buttonLink {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  background-color: #4d5256;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.buttonLink:hover {
+  background-color: #2980b9;
+}
