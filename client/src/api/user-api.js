@@ -1,6 +1,6 @@
 import  { api } from "./requester";
 
-const BASE_URL = 'http://localhost:3030/users/'
+const BASE_URL = 'http://localhost:3030/users'
 
 export async function login(email, password) {
   const result = await api.post(`${BASE_URL}/login`, { email, password })
@@ -15,5 +15,5 @@ export async function register(email, password) {
 }
 
 export async function logout() {
-   api.get(`${BASE_URL}/logout`)
+  return api.get(`${BASE_URL}/logout`)
 }

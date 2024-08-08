@@ -8,9 +8,7 @@ export function useLogin() {
     const result = await login(email, password)
 
     changeAuthState(result)
-    console.log('authState -> ' + result)
-    console.log(result)
-    //TODO update state
+
     return result
   }
 
@@ -24,8 +22,7 @@ export function useRegister() {
     const result = await register(email, password)
 
     changeAuthState(result)
-    console.log('authState -> ' + result)
-    console.log(result)
+
     return result
   }
 
@@ -36,9 +33,10 @@ export function useLogout() {
   const { logout: localLogout } = useAuthContext()
 
   async function logoutHandler() {
-    
-     localLogout()
-     await logout()
+    await logout()
+    localLogout()
+ 
+
   }
 
   return logoutHandler
