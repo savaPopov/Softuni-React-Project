@@ -15,6 +15,7 @@ import { AuthContextProvider } from "./contexts/AuthContext"
 import Logout from "./components/logout/Logout"
 import Details from "./components/details/Details"
 import Create from "./components/create/Create"
+import Edit from "./components/edit/Edit"
 
 function App() {
 
