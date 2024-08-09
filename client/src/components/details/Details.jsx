@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from "react-router-dom"
-import { getById } from "../../api/data-api"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { getById, remove } from "../../api/data-api"
 import { useEffect, useState } from "react"
 import { convertTime } from "../../util"
 import GoogleMaps from "./googleMaps/GoogleMaps"
@@ -27,18 +27,24 @@ export default function Details() {
   console.log(hike)
 
   async function deleteHandler() {
-    try {
-      await remove(hikeId)
+    const isConfirmed = confirm(`Are you sure you want to delete this ${hike.title} ?`)
 
-      navigate('/')
+    if (isConfirmed) {
+      try {
+        await remove(hikeId)
 
-    } catch (err) {
-      alert(err.message)
+        navigate('/')
+
+      } catch (err) {
+        alert(err.message)
+      }
     }
   }
+
   console.log(hike._ownerId)
   console.log(userId)
   const isOwner = userId == hike._ownerId
+  const hasLiked = false;
 
 
   return (
@@ -78,12 +84,14 @@ export default function Details() {
         <div className="buttons">
           {isOwner ? (
             <>
-              <h1><a className={styles.buttonLink} href="">Edit</a></h1>
-              <h1><a className={styles.buttonLink} href="">Delete</a></h1>
+              <h1><Link className={styles.buttonLink} to={`/edit/${hikeId}`}>Edit</Link></h1>
+              <h1><a className={styles.buttonLink} onClick={deleteHandler} href="#">Delete</a></h1>
             </>
-          ) : (
-            <h1><a className={styles.buttonLink} href="#">Like</a></h1>
-          )}
+          ) : hasLiked ?
+            <h1>You have already Liked this post</h1> :
+            (
+              <h1><a className={styles.buttonLink} href="#">Like</a></h1>
+            )}
 
         </div>
 
