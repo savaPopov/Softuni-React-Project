@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { convertTime } from "../../../util"
 
-export default function CatalogItem({title,description,mountain,_createdOn,imageUrl,_id}) {
+export default function CatalogItem({ title, description, mountain, _createdOn, imageUrl, _id }) {
   const formattedDate = convertTime(_createdOn)
   return (
     <article className="post">
@@ -14,7 +14,7 @@ export default function CatalogItem({title,description,mountain,_createdOn,image
         </div>
         <div className="meta">
           <time className="published" dateTime="2015-11-01">
-          {formattedDate}
+            {formattedDate}
           </time>
           {/* <a href="#" className="author">
             <span className="name">Jane Doe</span>
@@ -26,9 +26,9 @@ export default function CatalogItem({title,description,mountain,_createdOn,image
         <img src={imageUrl} alt="" />
       </span>
       <p>
-       {description}
+        {description}
       </p>
-  
+
       <footer>
         <ul className="stats">
           <li>

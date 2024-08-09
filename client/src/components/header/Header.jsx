@@ -19,7 +19,7 @@ export default function Header() {
           {isAuthenticated
             ? (<>
               <li><Link to="/logout">Logout</Link></li>
-              <li><a href="#">Create Hike!</a></li>
+              <li><Link to="/create">Create Hike!</Link></li>
             </>)
             : (<>
               <li><Link to="/register">Register</Link></li>

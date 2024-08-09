@@ -12,9 +12,9 @@ export function AuthContextProvider(props) {
     setAuthState(state)
   }
 
-  const logout = () => {
-      setAuthState(null)
-      // localStorage.removeItem('auth')
+  const localLogout = async () => {
+    setAuthState(null)
+    // localStorage.removeItem('auth')
   }
 
   const contextData = {
@@ -23,7 +23,7 @@ export function AuthContextProvider(props) {
     accessToken: authState?.accessToken,
     isAuthenticated: !!authState?.email,
     changeAuthState,
-    logout
+    localLogout
   }
 
   return (

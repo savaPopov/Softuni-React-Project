@@ -30,6 +30,10 @@ export async function getById(hikeId) {
 }
 
 
-export async function create(gameData) {
-  api.post(`http://localhost:3030/data/games`, gameData)
+export function create(hikeData) {
+  api.post(BASE_URL, hikeData)
+}
+
+export function remove(hikeId) {
+  return api.del(`${BASE_URL}/${hikeId}`)
 }

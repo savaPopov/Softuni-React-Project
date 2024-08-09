@@ -1,12 +1,15 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getById } from "../../api/data-api"
 import { useEffect, useState } from "react"
 import { convertTime } from "../../util"
 import GoogleMaps from "./googleMaps/GoogleMaps"
 import styles from './Details.module.css'
+import { useAuthContext } from "../../contexts/AuthContext"
 
 
 export default function Details() {
+  const navigate = useNavigate()
+  const { email, userId } = useAuthContext()
   const { hikeId } = useParams()
   const [hike, setHike] = useState({})
   useEffect(() => {
@@ -22,6 +25,22 @@ export default function Details() {
   const formattedTime = convertTime(hike._createdOn)
 
   console.log(hike)
+
+  async function deleteHandler() {
+    try {
+      await remove(hikeId)
+
+      navigate('/')
+
+    } catch (err) {
+      alert(err.message)
+    }
+  }
+  console.log(hike._ownerId)
+  console.log(userId)
+  const isOwner = userId == hike._ownerId
+
+
   return (
     <div id="main">
       {/* Post */}
@@ -37,8 +56,9 @@ export default function Details() {
             <time className="published" dateTime="2015-11-01">
               {formattedTime}
             </time>
+            {/* <span className="name">Created by: {email}</span> */}
             {/* <a href="#" className="author">
-              <span className="name">Jane Doe</span>
+     
               <img src="images/avatar.jpg" alt="" />
             </a> */}
           </div>
@@ -56,9 +76,15 @@ export default function Details() {
           Distance:{hike.distance}hours
         </p>
         <div className="buttons">
-          <h1 ><a className={styles.buttonLink} href="">Edit</a></h1>
-          <h1><a className={styles.buttonLink} href="">Delete</a></h1>
-          <h1><a className={styles.buttonLink} href="#">Like</a></h1>
+          {isOwner ? (
+            <>
+              <h1><a className={styles.buttonLink} href="">Edit</a></h1>
+              <h1><a className={styles.buttonLink} href="">Delete</a></h1>
+            </>
+          ) : (
+            <h1><a className={styles.buttonLink} href="#">Like</a></h1>
+          )}
+
         </div>
 
         <div className="details-comments">

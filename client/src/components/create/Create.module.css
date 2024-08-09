@@ -1,8 +1,8 @@
 
 .form-container {
-  max-width: 800px; /* Increase max-width for more horizontal space */
+  max-width: 1000px; /* Increase max-width for more horizontal space */
   margin: 20px auto;
-  padding: 100px;
+  padding: 120px;
   background-color: #f2fff0;
   border: 1px solid #ddd;
   border-radius: 8px;
