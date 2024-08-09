@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuthContext } from "../../contexts/AuthContext"
+import { useLogout } from "../../hooks/useAuth"
+import { useEffect } from "react"
 
 export default function Header() {
+  const navigate = useNavigate('/')
+  const logout = useLogout()
+
+  async function logoutHandler() {
+
+
+    await logout()
+    navigate('/')
+  }
+
   console.log('sava')
 
   const { isAuthenticated } = useAuthContext()
@@ -15,17 +27,17 @@ export default function Header() {
           <li>
             <Link to="/catalog">Catalog</Link>
           </li>
-          
+
           {isAuthenticated
             ? (<>
-              <li><Link to="/logout">Logout</Link></li>
+              <li><a href="#" onClick={logoutHandler}>Logout</a></li>
               <li><Link to="/create">Create Hike!</Link></li>
             </>)
             : (<>
               <li><Link to="/register">Register</Link></li>
               <li><Link to="/login">Login</Link></li>
             </>)
-            }
+          }
 
           <li>
             <a href="#">About Us</a>
