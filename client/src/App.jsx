@@ -16,6 +16,8 @@ import Logout from "./components/logout/Logout"
 import Details from "./components/details/Details"
 import Create from "./components/create/Create"
 import Edit from "./components/edit/Edit"
+import AuthGuard from "./components/common/AuthGuard"
+import GuestGuard from "./components/common/GuestGuard"
 
 function App() {
 
@@ -29,12 +31,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/catalog" element={<Catalog />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+
+          <Route element={<GuestGuard />}>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Route>
+
           <Route path="/details/:hikeId" element={<Details />} />
-          <Route path="/edit/:hikeId" element={<Edit />} />
-          <Route path="/create" element={<Create />} />
+
+          <Route element={<AuthGuard />}>
+            <Route path="/create" element={<Create />} />
+            <Route path="/edit/:hikeId" element={<Edit />} />
+            <Route path="/logout" element={<Logout />} />
+
+          </Route>
 
         </Routes>
         {/* <Form /> */}

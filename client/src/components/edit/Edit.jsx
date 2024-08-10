@@ -3,10 +3,22 @@ import styles from './Edit.module.css';
 import { useGetOneHike } from '../../hooks/useHikes';
 import { update } from '../../api/data-api';
 import { useForm } from '../../hooks/useForm';
+import { useAuthContext } from '../../contexts/AuthContext';
+import { useEffect } from 'react';
 export default function Edit() {
   const navigate = useNavigate()
   const { hikeId } = useParams()
   const [hike] = useGetOneHike(hikeId)
+  const { userId } = useAuthContext()
+  
+  useEffect(() => {
+    if (hike._ownerId != userId) {
+      navigate('/')
+    }
+  }, [])
+
+  console.log(hike._ownerId)
+  console.log(userId)
 
   async function editHandler(values) {
     //TODO modal

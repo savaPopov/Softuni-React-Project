@@ -31,6 +31,7 @@ export default function Header() {
           {isAuthenticated
             ? (<>
               <li><a href="#" onClick={logoutHandler}>Logout</a></li>
+              {/* <li><Link to="/logout">Logout</Link></li> */}
               <li><Link to="/create">Create Hike!</Link></li>
             </>)
             : (<>
