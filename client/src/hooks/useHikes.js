@@ -21,8 +21,9 @@ export function useGetOneHike(hikeId) {
       // console.log(games)
     }
     fetchData()
-
+    
   }, [hikeId])
+
   
 
   return [hike, setHike]

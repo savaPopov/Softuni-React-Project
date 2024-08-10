@@ -1,24 +1,34 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Edit.module.css';
-import { useGetOneHike } from '../../hooks/useHikes';
+
 import { update } from '../../api/data-api';
+
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useGetOneHike } from '../../hooks/useHikes';
 import { useEffect } from 'react';
+
 export default function Edit() {
+
   const navigate = useNavigate()
   const { hikeId } = useParams()
   const [hike] = useGetOneHike(hikeId)
   const { userId } = useAuthContext()
-  
+
   useEffect(() => {
+    if (hike._ownerId == undefined) {
+      return
+    }
+
     if (hike._ownerId != userId) {
       navigate('/')
     }
-  }, [])
 
-  console.log(hike._ownerId)
-  console.log(userId)
+  }, [[hike._ownerId, userId, navigate]])
+
+
+
+
 
   async function editHandler(values) {
     //TODO modal
@@ -125,7 +135,7 @@ export default function Edit() {
 
         <button type="submit" className={styles['form-button']}>Edit!</button>
       </form>
-      <p><span>Error</span></p>
+      <h4>Error</h4>
     </div>
   )
 }
