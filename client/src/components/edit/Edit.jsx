@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useGetOneHike } from '../../hooks/useHikes';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Edit() {
 
@@ -14,6 +14,7 @@ export default function Edit() {
   const { hikeId } = useParams()
   const [hike] = useGetOneHike(hikeId)
   const { userId } = useAuthContext()
+  const [err, setErr] = useState('')
 
   useEffect(() => {
     if (hike._ownerId == undefined) {
@@ -36,8 +37,15 @@ export default function Edit() {
     console.log(values)
     if (isConfirmed) {
       //TODO error handling
-      const updatedHike = await update(hikeId, values)
-      navigate(`/details/${hikeId}`)
+      try {
+        const updatedHike = await update(hikeId, values)
+
+        navigate(`/details/${hikeId}`)
+      } catch (err) {
+        setErr(err.message)
+      }
+
+
     }
   }
 
@@ -111,31 +119,22 @@ export default function Edit() {
             id="description" />
         </div>
         <div className={styles['form-group']}>
-          <label htmlFor="password">Lat</label>
+          <label htmlFor="password">Location(coordinates,Google Maps URL,etc...)</label>
           <input
             type="text"
-            id="lat"
-            name="lat"
-            value={values.lat}
-            onChange={changeHandler}
-            required
-          />
-        </div>
-        <div className={styles['form-group']}>
-          <label htmlFor="password">Lng</label>
-          <input
-            type="text"
-            id="lng"
-            name="lng"
-            value={values.lng}
+            id="location"
+            name="location"
+            value={values.location}
             onChange={changeHandler}
             required
           />
         </div>
 
+
         <button type="submit" className={styles['form-button']}>Edit!</button>
       </form>
-      <h4>Error</h4>
+      {err && (
+        <p className={styles['error-message']}>{err}</p>)}
     </div>
   )
 }

@@ -2,31 +2,32 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Create.module.css';
 import { useForm } from '../../hooks/useForm';
 import { create } from '../../api/data-api';
+import { useState } from 'react';
 
 let initialValues = {
   title: '',
   elavation: '',
-  distance:'',
+  distance: '',
   imageUrl: '',
   mountain: '',
   description: '',
-  lat: '',
-  lng: ''
+  location: '',
 }
 
 
 export default function Create() {
   const navigate = useNavigate()
+  const [err, setErr] = useState('')
 
   async function createHandler(values) {
     console.log(values)
 
 
     try {
-      const result =  await create(values)
+      const result = await create(values)
       navigate('/catalog')
     } catch (err) {
-      console.err(err.message)
+      setErr(err.message)
     }
   }
 
@@ -102,23 +103,12 @@ export default function Create() {
             id="description" />
         </div>
         <div className={styles['form-group']}>
-          <label htmlFor="password">Lat</label>
+          <label htmlFor="password">Location(coordinates,Google Maps URL,etc...)</label>
           <input
             type="text"
-            id="lat"
-            name="lat"
-            value={values.lat}
-            onChange={changeHandler}
-            required
-          />
-        </div>
-        <div className={styles['form-group']}>
-          <label htmlFor="password">Lng</label>
-          <input
-            type="text"
-            id="lng"
-            name="lng"
-            value={values.lng}
+            id="location"
+            name="location"
+            value={values.location}
             onChange={changeHandler}
             required
           />
@@ -126,7 +116,8 @@ export default function Create() {
 
         <button type="submit" className={styles['form-button']}>Create!</button>
       </form>
-      <p><span>Error</span></p>
+      {err && (
+        <p className={styles['error-message']}>{err}</p>)}
     </div>
   )
 }
