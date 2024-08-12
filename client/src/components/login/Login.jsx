@@ -14,6 +14,10 @@ export default function Login() {
   const loginHandler = async ({ email, password }) => {
     console.log(email, password)
     try {
+      //  email = email.trim()
+      //  password = password.trim()
+
+
       await login(email, password)
       navigate('/')
     } catch (err) {

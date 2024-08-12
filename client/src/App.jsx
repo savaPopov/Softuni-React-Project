@@ -18,6 +18,7 @@ import Create from "./components/create/Create"
 import Edit from "./components/edit/Edit"
 import AuthGuard from "./components/common/AuthGuard"
 import GuestGuard from "./components/common/GuestGuard"
+import Search from "./components/search/Search"
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
           </Route>
 
           <Route path="/details/:hikeId" element={<Details />} />
-
+          <Route path="/search" element={<Search />} />
           <Route element={<AuthGuard />}>
             <Route path="/create" element={<Create />} />
             <Route path="/edit/:hikeId" element={<Edit />} />

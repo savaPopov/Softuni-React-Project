@@ -26,6 +26,7 @@ export default function Header() {
         <ul>
           <li>
             <Link to="/catalog">Catalog</Link>
+
           </li>
 
           {isAuthenticated
@@ -40,32 +41,22 @@ export default function Header() {
             </>)
           }
 
-          <li>
-            <a href="#">About Us</a>
-          </li>
+          <li><a href="#">About Us</a></li>
+
 
 
 
 
         </ul>
+
       </nav>
+
       <nav className="main">
         <ul>
-          <li className="search">
-            <a className="fa-search" href="#search">
-              Search
-            </a>
-            <form id="search" method="get" action="#">
-              <input type="text" name="query" placeholder="Search" />
-            </form>
-          </li>
-          <li className="menu">
-            <a className="fa-bars" href="#menu">
-              Menu
-            </a>
-          </li>
+          <li><Link  className="fa-search" to="/search" >Search</Link></li>
         </ul>
       </nav>
+
     </header>
   )
 }
