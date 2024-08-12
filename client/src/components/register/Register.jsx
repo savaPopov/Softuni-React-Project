@@ -6,35 +6,29 @@ import { useForm } from '../../hooks/useForm';
 const initialValues = { email: '', password: '', repass: '' }
 
 
-
 export default function Register() {
   const [err, setErr] = useState('')
   const register = useRegister()
   const navigate = useNavigate()
 
   async function registerHandler(values) {
-    console.log(values)
 
-    if (values.password != values.repass){
+    if (values.password != values.repass) {
       setErr('Password Must Match Repass')
       return
     }
 
-    try{
-      await register(values.email,values.password)
+    try {
+      await register(values.email, values.password)
       navigate('/')
-    }catch(err){
+    } catch (err) {
       setErr(err.message)
       console.log(err.message)
     }
 
-
   }
 
   const { values, changeHandler, submitHandler } = useForm(initialValues, registerHandler)
-
-
-
 
   return (
     <div className={styles['form-container']}>
@@ -75,9 +69,9 @@ export default function Register() {
         </div>
         <button type="submit" className={styles['form-button']}>Register</button>
       </form>
-      {err && (<p>
-        <span>{err}</span></p>)}
+      {err && (
+        <p className={styles['error-message']}>{err}</p>)}
     </div>
-    
+
   );
 }

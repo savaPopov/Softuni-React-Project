@@ -19,6 +19,7 @@ export default function Details() {
   const { hikeId } = useParams()
   const [hike, setHike] = useState({})
   const [comments, dispatch] = useGetAllComments(hikeId)
+  const [commentErr, setCommentErr] = useState('')
 
   async function commentHandler({ comment }) {
     console.log(values)
@@ -28,7 +29,7 @@ export default function Details() {
       dispatch({ type: 'ADD_COMMENT', payload: { ...newComment, author: { email } } })
     } catch (err) {
       //TODO error handling
-      console.log(err.message)
+      setCommentErr(err.message)
     }
   }
 
@@ -43,7 +44,7 @@ export default function Details() {
     fetchData()
 
   }, [])
-  
+
   const formattedTime = convertTime(hike._createdOn)
 
   console.log(hike)
@@ -77,10 +78,13 @@ export default function Details() {
             <h2>
               {hike.title}
             </h2>
-            <p>{hike.mountain}</p>
+            <p className={styles['large-gray-text']}>{hike.mountain}</p>
           </div>
+
           <div className="meta">
+            Created On:
             <time className="published" dateTime="2015-11-01">
+
               {formattedTime}
             </time>
             {/* <span className="name">Created by: {email}</span> */}
@@ -94,13 +98,14 @@ export default function Details() {
           <img src={hike.imageUrl} alt="" />
         </span>
         <p>
-          {hike.description}
+          <b>Description:</b> {hike.description}
         </p>
         <p>
-          Elavation:{hike.elavation}m
+
+          <b> Total elavation:</b> {hike.elavation}m
         </p>
         <p>
-          Distance:{hike.distance}hours
+          <b>Distance:</b>{hike.distance}hours
         </p>
 
         <span className="buttons" style={{ display: "inline" }}>
@@ -108,11 +113,11 @@ export default function Details() {
           {isOwner
             ? (
               //TODO inline btns 
-              <>
+              <div className={styles['inline-buttons']}>
 
                 <h1><Link className={styles.buttonLink} to={`/edit/${hikeId}`}>Edit</Link></h1>
                 <h1><a className={styles.buttonLink} onClick={deleteHandler} href="#">Delete</a></h1>
-              </>
+              </div>
             )
             : isAuthenticated
               ? (hasLiked)
@@ -138,7 +143,6 @@ export default function Details() {
 
 
           </ul>
-          {/* Display paragraph: If there are no games in the database */}
           {comments.length == 0 && <h4 className="no-comment">No comments.</h4>}
         </div>
 
@@ -159,7 +163,10 @@ export default function Details() {
               defaultValue="Add Comment"
             />
 
+            {commentErr && (
+              <p className={styles['error-message']}>{commentErr}</p>)}
           </form>
+
         </article>
         )}
 

@@ -13,7 +13,9 @@ export default function CatalogItem({ title, description, mountain, _createdOn, 
           <p>{mountain}</p>
         </div>
         <div className="meta">
+        Created On:
           <time className="published" dateTime="2015-11-01">
+         
             {formattedDate}
           </time>
           {/* <a href="#" className="author">
@@ -30,7 +32,7 @@ export default function CatalogItem({ title, description, mountain, _createdOn, 
       </p>
 
       <footer>
-        <ul className="stats">
+        {/* <ul className="stats">
           <li>
             <a href="#">General</a>
           </li>
@@ -44,7 +46,7 @@ export default function CatalogItem({ title, description, mountain, _createdOn, 
               128
             </a>
           </li>
-        </ul>
+        </ul> */}
       </footer>
     </article>
   )

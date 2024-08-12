@@ -1,12 +1,15 @@
+import styles from './Login.module.css';
 import { useLogin } from "../../hooks/useAuth";
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "../../hooks/useForm";
+import { useState } from 'react';
 
 const initialValues = { email: '', password: '' }
 
 export default function Login() {
   const login = useLogin()
   const navigate = useNavigate()
+  const [err, setErr] = useState('')
 
   const loginHandler = async ({ email, password }) => {
     console.log(email, password)
@@ -14,7 +17,8 @@ export default function Login() {
       await login(email, password)
       navigate('/')
     } catch (err) {
-      console.log('EHO')
+      console.log(email, password)
+      setErr(err.message)
       console.log(err.message)
     }
   }
@@ -22,36 +26,38 @@ export default function Login() {
 
   const { values, changeHandler, submitHandler } = useForm(initialValues, loginHandler)
   return (
-    <section id="login-page" className="auth">
-      <form id="login" onSubmit={submitHandler}>
-        <div className="container">
-          <div className="brand-logo" />
-          <h1>Login</h1>
-          <label htmlFor="email">Email:</label>
+    <div className={styles['form-container']}>
+      <form className={styles.form} onSubmit={submitHandler}>
+        <h2 className={styles['form-title']}>Login</h2>
+        <div className={styles['form-group']}>
+          <label htmlFor="username">Email</label>
           <input
             type="email"
             id="email"
             name="email"
-            placeholder="Sokka@gmail.com"
             value={values.email}
             onChange={changeHandler}
+            required
           />
-          <label htmlFor="login-pass">Password:</label>
+        </div>
+        <div className={styles['form-group']}>
+          <label htmlFor="email">Password</label>
           <input
             type="password"
-            id="login-password"
+            id="password"
             name="password"
             value={values.password}
             onChange={changeHandler}
+            required
           />
-          <input type="submit" className="btn submit" defaultValue="Login" />
-          <p className="field">
-            <span>
-              If you don't have profile click <Link to="/register">here</Link>
-            </span>
-          </p>
         </div>
+        <button type="submit" className={styles['form-button']}>Login</button>
       </form>
-    </section>
+      {err && (
+        <p className={styles['error-message']}> {err} </p>)
+      }
+    </div>
+
+
   )
 }

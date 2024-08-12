@@ -1165,6 +1165,7 @@
     const secret = 'This is not a production server';
 
     function hash(string) {
+        console.log('String to be hashed:', string);
         const hash = crypto__default['default'].createHmac('sha256', secret);
         hash.update(string);
         return hash.digest('hex');
@@ -1349,8 +1350,7 @@
                 imageUrl: "https://tripsjournal.com/wp-content/uploads/2020/07/hija-ivan-vazov-4-1.jpg",
                 mountain: 'Rila',
                 description: "A pretty easy route and in the end you can see the 7 lakes of Rila",
-                lat: 42.18986125621023,
-                lng: 23.283539283698673,
+                location: '42.18974577783478, 23.283533732052366',
                 _createdOn: 1722433336826,
                 _id: "85e3404c-ff67-4885-a0e5-7fef294341e9"
             },
@@ -1362,8 +1362,7 @@
                 imageUrl: "https://www.bg-guide.org/thumbs/1130x636/accommodation/hija-dobrila_1130x636_crop_c234565a6f.jpg",
                 mountain: 'Stara Planina',
                 description: "Medium difficulty bring raincoat with you",
-                lat: 42.71127263817072,
-                lng: 24.76116471255945,
+                location: '42.71115438798683, 24.761153983440185',
                 _createdOn: 1625184000000,
                 _id: "fa57e73a-8ff6-4113-a882-e1c7e7ed2543"
             }

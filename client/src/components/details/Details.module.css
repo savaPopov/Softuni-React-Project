@@ -15,3 +15,26 @@
 .buttonLink:hover {
   background-color: #2980b9;
 }
+
+.large-gray-text {
+  font-size: 18px;
+  color: #808080;
+
+}
+
+.inline-buttons {
+  display: flex;
+  gap: 10%;
+  justify-content: flex-start;
+
+}
+.error-message {
+  color: #D8000C;
+  background-color: #FFD2D2;
+  border: 1px solid #D8000C;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-weight: bold;
+  text-align: center;
+}

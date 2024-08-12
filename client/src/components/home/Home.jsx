@@ -10,8 +10,7 @@ export default function Home() {
       const data = await getAllRecent()
       // console.log(data)
       setHikes(data)
-      // setGames(data)
-      // console.log(games)
+
     }
     fetchData()
 
