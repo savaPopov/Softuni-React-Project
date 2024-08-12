@@ -3,6 +3,7 @@ import styles from './Create.module.css';
 import { useForm } from '../../hooks/useForm';
 import { create } from '../../api/data-api';
 import { useState } from 'react';
+import { extractCoordinates } from '../../util';
 
 let initialValues = {
   title: '',
@@ -24,7 +25,33 @@ export default function Create() {
 
 
     try {
-      const result = await create(values)
+      let title = values.title.trim()
+      let elavation = values.elavation.trim()
+      let distance = values.distance.trim()
+      let imageUrl = values.imageUrl.trim()
+      let mountain = values.mountain.trim()
+      let description = values.description.trim()
+      let location = values.location.trim()
+      // console.log(!!values.title.trim())
+      console.log('Trimmed data')
+      console.log(title, elavation, distance, imageUrl, mountain, location)
+
+      if (!title || !elavation || !distance || !imageUrl || !mountain || !location) {
+        throw new Error('All fields must be filled')
+      }
+
+      let place = extractCoordinates(location)
+
+      if (!place) {
+        throw new Error('Location needs to be valid')
+      }
+
+      if (description.length < 4) {
+        throw new Error('Description must be longer than 4 charachters')
+      }
+
+
+      const result = create({ title, elavation, distance, imageUrl, mountain, description, location })
       navigate('/catalog')
     } catch (err) {
       setErr(err.message)
@@ -39,7 +66,7 @@ export default function Create() {
       <form className={styles.form} onSubmit={submitHandler}>
         <h2 className={styles['form-title']}>Create Hike</h2>
         <div className={styles['form-group']}>
-          <label htmlFor="username">Title</label>
+          <label htmlFor="username">Title of the Hija</label>
           <input
             type="text"
             id="title"
@@ -50,9 +77,10 @@ export default function Create() {
           />
         </div>
         <div className={styles['form-group']}>
-          <label htmlFor="email">Elavation</label>
+          <label htmlFor="email">Elavation of the Hija</label>
           <input
-            type="text"
+            type="number"
+            min="0"
             id="elavation"
             name="elavation"
             value={values.elavation}
@@ -61,9 +89,10 @@ export default function Create() {
           />
         </div>
         <div className={styles['form-group']}>
-          <label htmlFor="password">Distance</label>
+          <label htmlFor="password">Distance in hours</label>
           <input
-            type="text"
+            type="number"
+            min="0"
             id="distance"
             name="distance"
             value={values.distance}
@@ -74,7 +103,7 @@ export default function Create() {
         <div className={styles['form-group']}>
           <label htmlFor="password">Image Url</label>
           <input
-            type="text"
+            type="url"
             id="imageUrl"
             name="imageUrl"
             value={values.imageUrl}

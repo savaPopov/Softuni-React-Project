@@ -38,7 +38,31 @@ export default function Edit() {
     if (isConfirmed) {
       //TODO error handling
       try {
-        const updatedHike = await update(hikeId, values)
+        let title = values.title.trim()
+        let elavation = values.elavation.trim()
+        let distance = values.distance.trim()
+        let imageUrl = values.imageUrl.trim()
+        let mountain = values.mountain.trim()
+        let description = values.description.trim()
+        let location = values.location.trim()
+        // console.log(!!values.title.trim())
+        console.log('Trimmed data')
+        console.log(title, elavation, distance, imageUrl, mountain, location)
+
+        if (!title || !elavation || !distance || !imageUrl || !mountain || !location) {
+          throw new Error('All fields must be filled')
+        }
+
+        let place = extractCoordinates(location)
+
+        if (!place) {
+          throw new Error('Location needs to be valid')
+        }
+
+        if (description.length < 4) {
+          throw new Error('Description must be longer than 4 charachters')
+        }
+        const updatedHike = await update(hikeId, { title, elavation, distance, imageUrl, mountain, description, location })
 
         navigate(`/details/${hikeId}`)
       } catch (err) {
@@ -68,7 +92,8 @@ export default function Edit() {
         <div className={styles['form-group']}>
           <label htmlFor="email">Elavation</label>
           <input
-            type="text"
+            type="number"
+            min="0"
             id="elavation"
             name="elavation"
             value={values.elavation}
@@ -79,7 +104,8 @@ export default function Edit() {
         <div className={styles['form-group']}>
           <label htmlFor="password">Distance</label>
           <input
-            type="text"
+            type="number"
+            min="0"
             id="distance"
             name="distance"
             value={values.distance}
@@ -90,7 +116,7 @@ export default function Edit() {
         <div className={styles['form-group']}>
           <label htmlFor="password">Image Url</label>
           <input
-            type="text"
+            type="url"
             id="imageUrl"
             name="imageUrl"
             value={values.imageUrl}
