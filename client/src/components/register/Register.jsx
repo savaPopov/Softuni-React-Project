@@ -13,13 +13,30 @@ export default function Register() {
 
   async function registerHandler(values) {
 
-    if (values.password != values.repass) {
-      setErr('Password Must Match Repass')
-      return
-    }
+
+
 
     try {
-      await register(values.email, values.password)
+
+      let password = values.password.trim()
+      let repass = values.repass.trim()
+      let email = values.email.trim()
+
+
+      if (!password || !repass || !email) {
+        throw new Error('All fields must be filled ')
+      }
+
+      if (password != repass) {
+        throw new Error('Password Must Match Repass')
+      }
+
+      if (password.length <= 3) {
+        throw new Error('Password must be at least 3 charachters')
+      }
+
+
+      await register(email, password)
       navigate('/')
     } catch (err) {
       setErr(err.message)
