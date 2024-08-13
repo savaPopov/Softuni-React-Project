@@ -41,7 +41,7 @@ export default function Header() {
             </>)
           }
 
-          <li><a href="#">About Us</a></li>
+          <li><Link to="/about">About Us</Link></li>
 
 
 
@@ -53,7 +53,7 @@ export default function Header() {
 
       <nav className="main">
         <ul>
-          <li><Link  className="fa-search" to="/search" >Search</Link></li>
+          <li><Link className="fa-search" to="/search" >Search</Link></li>
         </ul>
       </nav>
 

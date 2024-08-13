@@ -23,13 +23,6 @@ export default function Details() {
   const [commentErr, setCommentErr] = useState('')
   const [isModalOpen, setModalOpen] = useState(false)
 
-  const handleDeleteClick = () => {
-    setModalOpen(true)
-  }
-
-  const handleCancel = () => {
-    setModalOpen(false)
-  }
 
   async function commentHandler({ comment }) {
     console.log(values)
@@ -60,9 +53,7 @@ export default function Details() {
   console.log(hike)
 
   async function deleteHandler() {
-    // const isConfirmed = confirm(`Are you sure you want to delete this ${hike.title} ?`)
 
-    // if (isConfirmed) {
     try {
       await remove(hikeId)
 
@@ -71,7 +62,6 @@ export default function Details() {
     } catch (err) {
       alert(err.message)
     }
-    // }
   }
 
 
@@ -120,7 +110,7 @@ export default function Details() {
         </p>
 
         <span className="buttons" style={{ display: "inline" }}>
-          <DeleteConfirmationModal isOpen={isModalOpen} onClose={handleCancel} onConfirm={deleteHandler} />
+          <DeleteConfirmationModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} onConfirm={deleteHandler} />
           {isOwner
             ? (
               //TODO inline btns 
@@ -128,7 +118,7 @@ export default function Details() {
 
                 <h1><Link className={styles.buttonLink} to={`/edit/${hikeId}`}>Edit</Link></h1>
 
-                <h1><a className={styles.buttonLink} onClick={handleDeleteClick} href="#">Delete</a></h1>
+                <h1><a className={styles.buttonLink} onClick={() => setModalOpen(true)} href="#">Delete</a></h1>
 
               </div>
 

@@ -6,8 +6,9 @@ const containerStyle = {
   width: '100%',
   height: '500px'
 };
-//42.18986125621023, 23.283539283698673
-42.18974577783478, 23.283533732052366
+
+
+
 const options = {
   mapTypeId: 'satellite',
   styles: [
