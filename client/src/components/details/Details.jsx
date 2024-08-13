@@ -8,6 +8,7 @@ import { useAuthContext } from "../../contexts/AuthContext"
 import { useForm } from "../../hooks/useForm"
 import { useGetAllComments } from "../../hooks/useComments"
 import { createComment } from "../../api/comments-api"
+import DeleteConfirmationModal from "./deleteConfirmModal/DeleteConfirmationModal"
 
 const initialValues = {
   comment: ''
@@ -20,6 +21,15 @@ export default function Details() {
   const [hike, setHike] = useState({})
   const [comments, dispatch] = useGetAllComments(hikeId)
   const [commentErr, setCommentErr] = useState('')
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const handleDeleteClick = () => {
+    setModalOpen(true)
+  }
+
+  const handleCancel = () => {
+    setModalOpen(false)
+  }
 
   async function commentHandler({ comment }) {
     console.log(values)
@@ -50,18 +60,18 @@ export default function Details() {
   console.log(hike)
 
   async function deleteHandler() {
-    const isConfirmed = confirm(`Are you sure you want to delete this ${hike.title} ?`)
+    // const isConfirmed = confirm(`Are you sure you want to delete this ${hike.title} ?`)
 
-    if (isConfirmed) {
-      try {
-        await remove(hikeId)
+    // if (isConfirmed) {
+    try {
+      await remove(hikeId)
 
-        navigate('/')
-
-      } catch (err) {
-        alert(err.message)
-      }
+      navigate('/')
+      setModalOpen(false)
+    } catch (err) {
+      alert(err.message)
     }
+    // }
   }
 
 
@@ -70,6 +80,7 @@ export default function Details() {
 
 
   return (
+
     <div id="main">
       {/* Post */}
       <article className="post">
@@ -109,15 +120,18 @@ export default function Details() {
         </p>
 
         <span className="buttons" style={{ display: "inline" }}>
-
+          <DeleteConfirmationModal isOpen={isModalOpen} onClose={handleCancel} onConfirm={deleteHandler} />
           {isOwner
             ? (
               //TODO inline btns 
               <div className={styles['inline-buttons']}>
 
                 <h1><Link className={styles.buttonLink} to={`/edit/${hikeId}`}>Edit</Link></h1>
-                <h1><a className={styles.buttonLink} onClick={deleteHandler} href="#">Delete</a></h1>
+
+                <h1><a className={styles.buttonLink} onClick={handleDeleteClick} href="#">Delete</a></h1>
+
               </div>
+
             )
             : isAuthenticated
               ? (hasLiked)
