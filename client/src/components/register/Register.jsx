@@ -29,7 +29,7 @@ export default function Register() {
       if (password.length < 3) {
         throw new Error('Password must be at least 3 charachters')
       }
-      console.log(email)
+  
 
       await register(email, password)
       navigate('/')

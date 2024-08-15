@@ -12,7 +12,7 @@ export async function createComment(hikeId, text) {
 
 export function getAllComments(hikeId) {
   const params = new URLSearchParams({
-    where: `gameId="${hikeId}"`,
+    where: `hikeId="${hikeId}"`,
     load: `author=_ownerId:users`,
   })
   let result = api.get(`${BASE_URL}?${params.toString()}`)

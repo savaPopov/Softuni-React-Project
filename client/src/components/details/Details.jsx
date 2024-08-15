@@ -44,7 +44,6 @@ export default function Details() {
 
 
   async function commentHandler({ comment }) {
-    console.log(values)
     try {
       const newComment = await createComment(hikeId, comment)
 
@@ -77,7 +76,7 @@ export default function Details() {
       navigate('/')
       setModalOpen(false)
     } catch (err) {
-      alert(err.message)
+      console.log(err.message)
     }
   }
 

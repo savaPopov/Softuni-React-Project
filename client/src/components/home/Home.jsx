@@ -33,20 +33,17 @@ export default function Home() {
       </section>
 
       <section id="sidebar">
-        {/* Intro */}
         <section id="intro">
-          <a href="#" className="logo">
+          <span  className="logo">
             <img src="images/logo.jpg" alt="" />
-          </a>
+          </span>
           <header>
             <h2>The fun of a lifetime!</h2>
             <p>
               Recent Hiking Trails
-              {/* <a href="http://html5up.net">HTML5 UP</a> */}
             </p>
           </header>
         </section>
-        {/* Mini Posts */}
         <section>
           <div className="mini-posts">
 
