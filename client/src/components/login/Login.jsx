@@ -22,6 +22,7 @@ export default function Login() {
       navigate('/')
     } catch (err) {
       console.log(email, password)
+      values.password = ''
       setErr(err.message)
       console.log(err.message)
     }

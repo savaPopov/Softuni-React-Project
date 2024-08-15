@@ -32,12 +32,43 @@ export default function Create() {
       let mountain = values.mountain.trim()
       let description = values.description.trim()
       let location = values.location.trim()
-      // console.log(!!values.title.trim())
-      console.log('Trimmed data')
-      console.log(title, elavation, distance, imageUrl, mountain, location)
 
-      if (!title || !elavation || !distance || !imageUrl || !mountain || !location) {
-        throw new Error('All fields must be filled')
+      const errors = []
+      const newFieldsWithError = {}
+
+      if (!title) {
+        errors.push('Title is required.');
+        newFieldsWithError.title = true;
+      }
+      if (!elavation) {
+        errors.push('Elevation is required.');
+        newFieldsWithError.elavation = true;
+      }
+      if (!distance) {
+        errors.push('Distance is required.');
+        newFieldsWithError.distance = true;
+      }
+      if (!imageUrl) {
+        errors.push('Image URL is required.');
+        newFieldsWithError.imageUrl = true;
+      }
+      if (!mountain) {
+        errors.push('Mountain is required.');
+        newFieldsWithError.mountain = true;
+      }
+      if (!location) {
+        errors.push('Location is required.');
+        newFieldsWithError.location = true;
+      }
+
+      if (elavation > 10002) {
+        errors.push('Elavation needs to be below 10000m')
+        newFieldsWithError.elavation = true;
+      }
+
+      if (distance > 1000) {
+        errors.push('The distance needs to be lower than 1000 hours')
+        newFieldsWithError.distance = true;
       }
 
       let place = extractCoordinates(location)

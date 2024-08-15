@@ -7,6 +7,8 @@ import { useForm } from '../../hooks/useForm';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useGetOneHike } from '../../hooks/useHikes';
 import { useEffect, useState } from 'react';
+import { useValidate } from '../../hooks/useValidate';
+
 
 export default function Edit() {
 
@@ -14,7 +16,10 @@ export default function Edit() {
   const { hikeId } = useParams()
   const [hike] = useGetOneHike(hikeId)
   const { userId } = useAuthContext()
-  const [err, setErr] = useState('')
+  const { err, fieldsWithErrors, validate } = useValidate()
+  const [apiErr, setApiErr] = useState('')
+  const { localLogout } = useAuthContext()
+
 
   useEffect(() => {
     if (hike._ownerId == undefined) {
@@ -27,50 +32,32 @@ export default function Edit() {
 
   }, [[hike._ownerId, userId, navigate]])
 
-
-
-
-
   async function editHandler(values) {
-    //TODO modal
     const isConfirmed = confirm(`Are you sure you want to update this hike?`)
-    console.log(values)
-    if (isConfirmed) {
-      //TODO error handling
-      try {
-        let title = values.title.trim()
-        let elavation = values.elavation.trim()
-        let distance = values.distance.trim()
-        let imageUrl = values.imageUrl.trim()
-        let mountain = values.mountain.trim()
-        let description = values.description.trim()
-        let location = values.location.trim()
-        // console.log(!!values.title.trim())
-        console.log('Trimmed data')
-        console.log(title, elavation, distance, imageUrl, mountain, location)
 
-        if (!title || !elavation || !distance || !imageUrl || !mountain || !location) {
-          throw new Error('All fields must be filled')
-        }
-
-        let place = extractCoordinates(location)
-
-        if (!place) {
-          throw new Error('Location needs to be valid')
-        }
-
-        if (description.length < 4) {
-          throw new Error('Description must be longer than 4 charachters')
-        }
-        const updatedHike = await update(hikeId, { title, elavation, distance, imageUrl, mountain, description, location })
-
-        navigate(`/details/${hikeId}`)
-      } catch (err) {
-        setErr(err.message)
-      }
-
-
+    if (!isConfirmed) {
+      return;
     }
+
+    const trimmedData = validate(values)
+
+    if (!trimmedData) {
+      return
+    }
+
+
+    try {
+      const updatedHike = await update(hikeId, trimmedData)
+
+      navigate(`/details/${hikeId}`)
+    } catch (err) {
+      if (err.message == 'Unauthorized') {
+        localLogout()
+        navigate('/login')
+      }
+      setApiErr(err.message)
+    }
+
   }
 
   const { changeHandler, submitHandler, values } = useForm(hike, editHandler, true)
@@ -79,37 +66,40 @@ export default function Edit() {
       <form className={styles.form} onSubmit={submitHandler}>
         <h2 className={styles['form-title']}>Edit Hike</h2>
         <div className={styles['form-group']}>
-          <label htmlFor="username">Title</label>
+          <label htmlFor="username">Title of the Hija</label>
           <input
             type="text"
             id="title"
             name="title"
-            value={values.title}
+            value={values.title || ''}
             onChange={changeHandler}
+            className={fieldsWithErrors.title ? styles.errorInput : ''}
             required
           />
         </div>
         <div className={styles['form-group']}>
-          <label htmlFor="email">Elavation</label>
+          <label htmlFor="email">Elavation of the Hija</label>
           <input
             type="number"
             min="0"
             id="elavation"
             name="elavation"
-            value={values.elavation}
+            value={values.elavation || ''}
             onChange={changeHandler}
+            className={fieldsWithErrors.elavation ? styles.errorInput : ''}
             required
           />
         </div>
         <div className={styles['form-group']}>
-          <label htmlFor="password">Distance</label>
+          <label htmlFor="password">Distance in hours</label>
           <input
             type="number"
             min="0"
             id="distance"
             name="distance"
-            value={values.distance}
+            value={values.distance || ''}
             onChange={changeHandler}
+            className={fieldsWithErrors.distance ? styles.errorInput : ''}
             required
           />
         </div>
@@ -119,8 +109,9 @@ export default function Edit() {
             type="url"
             id="imageUrl"
             name="imageUrl"
-            value={values.imageUrl}
+            value={values.imageUrl || ''}
             onChange={changeHandler}
+            className={fieldsWithErrors.imageUrl ? styles.errorInput : ''}
             required
           />
         </div>
@@ -130,8 +121,9 @@ export default function Edit() {
             type="text"
             id="mountain"
             name="mountain"
-            value={values.mountain}
+            value={values.mountain || ''}
             onChange={changeHandler}
+            className={fieldsWithErrors.mountain ? styles.errorInput : ''}
             required
           />
         </div>
@@ -139,10 +131,12 @@ export default function Edit() {
         <div className={styles['form-group']}>
           <label htmlFor="password">Description</label>
           <textarea
+            className={fieldsWithErrors.description ? styles.errorInput : ''}
             name="description"
-            value={values.description}
+            value={values.description || ''}
             onChange={changeHandler}
             id="description" />
+
         </div>
         <div className={styles['form-group']}>
           <label htmlFor="password">Location(coordinates,Google Maps URL,etc...)</label>
@@ -150,8 +144,9 @@ export default function Edit() {
             type="text"
             id="location"
             name="location"
-            value={values.location}
+            value={values.location || ''}
             onChange={changeHandler}
+            className={fieldsWithErrors.location ? styles.errorInput : ''}
             required
           />
         </div>
@@ -159,8 +154,18 @@ export default function Edit() {
 
         <button type="submit" className={styles['form-button']}>Edit!</button>
       </form>
-      {err && (
-        <p className={styles['error-message']}>{err}</p>)}
+
+      {err.length > 0 && (
+        <ul>
+          {err.map((error, index) => (
+            <p key={index} className={styles['error-message']}>{error}</p>
+          ))}
+        </ul>
+      )}
+      {apiErr && (
+        <p className={styles['error-message']}><b>Api Error:</b>{apiErr}</p>
+      )}
+
     </div>
   )
 }

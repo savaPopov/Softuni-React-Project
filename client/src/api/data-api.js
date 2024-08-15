@@ -38,6 +38,8 @@ export function remove(hikeId) {
   return api.del(`${BASE_URL}/${hikeId}`)
 }
 
-export function update(hikeId,hikeData){
-  return api.put(`${BASE_URL}/${hikeId}`,hikeData)
+export function update(hikeId, hikeData) {
+  // console.log('hike data from update')
+  // console.log(hikeData)
+  return api.put(`${BASE_URL}/${hikeId}`, hikeData)
 }

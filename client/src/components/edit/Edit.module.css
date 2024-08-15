@@ -34,7 +34,7 @@
   color: #2c5f2d;
 }
 
-.form-group input {
+.form-group input{
   width: 100%;
   padding: 10px;
   border: 1px solid #8b4513;
@@ -42,6 +42,12 @@
   box-sizing: border-box;
   background-color: #f0f8ff;
   color: #2c5f2d;
+}
+
+.form-group input.errorInput,
+.form-group textarea.errorInput {
+  border-color: #D8000C;
+  background-color: #FFD2D2;
 }
 
 .form-button {
