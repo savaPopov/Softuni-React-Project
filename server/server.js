@@ -1365,7 +1365,31 @@
                 location: '42.71115438798683, 24.761153983440185',
                 _createdOn: 1625184000000,
                 _id: "fa57e73a-8ff6-4113-a882-e1c7e7ed2543"
-            }
+            },
+            '24e0d06f-31d3-4c78-83f0-302793bbd9d7': {
+                _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                title: "Mazalat",
+                elavation: "1550",
+                distance: "6",
+                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX5MJ4XWyfkevAOEevViDAynWcxAqefa-PWg&s",
+                mountain: 'Stara Planina',
+                description: "Layout and capacity:\nTwo storey solid-built house - 66 places\nBedrooms with 2 beds, Communal sleeping.\nProvisions: blankets, bed sheet, cooking utensils, cutlery, pots, water, park radio,\nelectricity.\nToilet - inside the hut\nBathroom - inside the hut",
+                location: '42.759184687098, 25.116601627988054',
+                _createdOn: 1723753087194,
+                _id: "24e0d06f-31d3-4c78-83f0-302793bbd9d7"
+            },
+            '313b5e3b-992e-4446-b33a-526949f617a0': {
+                _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+                title: "Kozia Stena",
+                elavation: "1562",
+                distance: "3",
+                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuT7Nyiy9ftW61Fa-CZHOaMaS8GrO_veUnPA&s",
+                mountain: 'Stara Planina',
+                description: "Layout and capacity:\nTree storey solid-built house - 102 places\nBedrooms with 2 beds, with 4 beds and\na communal sleeping.\nProvisions: blankets, bed sheet, cooking utensils, cutlery, pots, water, park radio.\nToilet - inside the hut\nBathroom - inside the hut",
+                location: "42.785444572875484, 24.529383673068423",
+                _createdOn: 1723753466115,
+                _id: "313b5e3b-992e-4446-b33a-526949f617a0"
+            },
         },
         recipes: {
             "3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
