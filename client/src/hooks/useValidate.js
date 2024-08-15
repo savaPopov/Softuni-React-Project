@@ -42,10 +42,6 @@ export function useValidate() {
       newFieldsWithError.location = true;
     }
 
-    // if (!description) {
-    //   errors.push('Description is required')
-    //   newFieldsWithError.description = true;
-    // }
 
     if (elavation > 10002) {
       errors.push('Elavation needs to be below 10000m')

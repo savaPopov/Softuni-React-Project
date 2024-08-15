@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 
-/* Modal container for content */
+
 .modal-container {
   background-color: #ffffff;
   padding: 20px;
@@ -22,26 +22,26 @@
   text-align: center;
 }
 
-/* Modal title */
+
 .modal-title {
   font-size: 24px;
   margin-bottom: 10px;
   color: #8b4513;
 }
 
-/* Modal message */
+
 .modal-message {
   margin-bottom: 20px;
   color: #2c5f2d;
 }
 
-/* Buttons container */
+
 .modal-buttons {
   display: flex;
   justify-content: space-around;
 }
 
-/* Confirm button */
+
 .confirm-button {
   background-color: #D8000C;
   color: white;
@@ -56,7 +56,7 @@
   background-color: #a40000;
 }
 
-/* Cancel button */
+
 .cancel-button {
   background-color: #8b4513;
   color: white;

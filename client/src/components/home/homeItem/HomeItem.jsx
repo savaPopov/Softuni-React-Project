@@ -12,9 +12,6 @@ export default function HomeItem({ _id, title, imageUrl, _createdOn }) {
         <time className="published" dateTime="2015-10-17">
           {formattedTime}
         </time>
-        {/* <a href="#" className="author">
-          <img src="images/avatar.jpg" alt="" />
-        </a> */}
       </header>
       <Link to={`/details/${_id}`} className="image">
         <img src={imageUrl} alt="" />

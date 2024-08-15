@@ -1,6 +1,6 @@
 import styles from './Login.module.css';
 import { useLogin } from "../../hooks/useAuth";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "../../hooks/useForm";
 import { useState } from 'react';
 
