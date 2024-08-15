@@ -3,7 +3,7 @@ import styles from './Create.module.css';
 import { useForm } from '../../hooks/useForm';
 import { create } from '../../api/data-api';
 import { useState } from 'react';
-import { extractCoordinates } from '../../util';
+import { useValidate } from '../../hooks/useValidate';
 
 let initialValues = {
   title: '',
@@ -18,74 +18,21 @@ let initialValues = {
 
 export default function Create() {
   const navigate = useNavigate()
-  const [err, setErr] = useState('')
+  const [apiErr, setApiErr] = useState('')
+  const { err, fieldsWithErrors, validate } = useValidate()
 
   async function createHandler(values) {
-    console.log(values)
+    const trimmedData = validate(values)
 
+    if (!trimmedData) {
+      return
+    }
 
     try {
-      let title = values.title.trim()
-      let elavation = values.elavation.trim()
-      let distance = values.distance.trim()
-      let imageUrl = values.imageUrl.trim()
-      let mountain = values.mountain.trim()
-      let description = values.description.trim()
-      let location = values.location.trim()
-
-      const errors = []
-      const newFieldsWithError = {}
-
-      if (!title) {
-        errors.push('Title is required.');
-        newFieldsWithError.title = true;
-      }
-      if (!elavation) {
-        errors.push('Elevation is required.');
-        newFieldsWithError.elavation = true;
-      }
-      if (!distance) {
-        errors.push('Distance is required.');
-        newFieldsWithError.distance = true;
-      }
-      if (!imageUrl) {
-        errors.push('Image URL is required.');
-        newFieldsWithError.imageUrl = true;
-      }
-      if (!mountain) {
-        errors.push('Mountain is required.');
-        newFieldsWithError.mountain = true;
-      }
-      if (!location) {
-        errors.push('Location is required.');
-        newFieldsWithError.location = true;
-      }
-
-      if (elavation > 10002) {
-        errors.push('Elavation needs to be below 10000m')
-        newFieldsWithError.elavation = true;
-      }
-
-      if (distance > 1000) {
-        errors.push('The distance needs to be lower than 1000 hours')
-        newFieldsWithError.distance = true;
-      }
-
-      let place = extractCoordinates(location)
-
-      if (!place) {
-        throw new Error('Location needs to be valid')
-      }
-
-      if (description.length < 4) {
-        throw new Error('Description must be longer than 4 charachters')
-      }
-
-
-      const result = create({ title, elavation, distance, imageUrl, mountain, description, location })
+      const result = await create(trimmedData)
       navigate('/catalog')
     } catch (err) {
-      setErr(err.message)
+      setApiErr(err.message)
     }
   }
 
@@ -104,6 +51,7 @@ export default function Create() {
             name="title"
             value={values.title}
             onChange={changeHandler}
+            className={fieldsWithErrors.title ? styles.errorInput : ''}
             required
           />
         </div>
@@ -116,6 +64,7 @@ export default function Create() {
             name="elavation"
             value={values.elavation}
             onChange={changeHandler}
+            className={fieldsWithErrors.elavation ? styles.errorInput : ''}
             required
           />
         </div>
@@ -128,6 +77,7 @@ export default function Create() {
             name="distance"
             value={values.distance}
             onChange={changeHandler}
+            className={fieldsWithErrors.distance ? styles.errorInput : ''}
             required
           />
         </div>
@@ -139,6 +89,7 @@ export default function Create() {
             name="imageUrl"
             value={values.imageUrl}
             onChange={changeHandler}
+            className={fieldsWithErrors.imageUrl ? styles.errorInput : ''}
             required
           />
         </div>
@@ -150,6 +101,7 @@ export default function Create() {
             name="mountain"
             value={values.mountain}
             onChange={changeHandler}
+            className={fieldsWithErrors.mountain ? styles.errorInput : ''}
             required
           />
         </div>
@@ -160,6 +112,7 @@ export default function Create() {
             name="description"
             value={values.description}
             onChange={changeHandler}
+            className={fieldsWithErrors.description ? styles.errorInput : ''}
             id="description" />
         </div>
         <div className={styles['form-group']}>
@@ -170,14 +123,25 @@ export default function Create() {
             name="location"
             value={values.location}
             onChange={changeHandler}
+            className={fieldsWithErrors.location ? styles.errorInput : ''}
             required
           />
         </div>
 
         <button type="submit" className={styles['form-button']}>Create!</button>
       </form>
-      {err && (
-        <p className={styles['error-message']}>{err}</p>)}
+
+      {err.length > 0 && (
+        <ul>
+          {err.map((error, index) => (
+            <p key={index} className={styles['error-message']}>{error}</p>
+          ))}
+        </ul>
+      )}
+      {apiErr && (
+        <p className={styles['error-message']}><b>Api Error:</b>{apiErr}</p>
+      )}
+
     </div>
   )
 }

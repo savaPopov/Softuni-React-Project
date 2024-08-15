@@ -8,20 +8,17 @@ export default function Catalog() {
   useEffect(() => {
     async function fetchData() {
       const data = await getAll()
-      // console.log(data)
+
       setHikes(data)
-      // setGames(data)
-      // console.log(games)
+
     }
     fetchData()
 
-    // console.log(data)
-    // fetchData
   }, [])
-  console.log(hikes)
+
   return (
     <div id="main">
-      {/* Post */}
+
       {hikes.length > 0 ? hikes.map(hike => <CatalogItem key={hike._id} {...hike} />) : <p className="no-articles">No Hikes yet</p>}
      
 

@@ -18,10 +18,7 @@ export default function CatalogItem({ title, description, mountain, _createdOn, 
          
             {formattedDate}
           </time>
-          {/* <a href="#" className="author">
-            <span className="name">Jane Doe</span>
-            <img src="images/avatar.jpg" alt="" />
-          </a> */}
+
         </div>
       </header>
       <span className="image featured">
@@ -32,21 +29,7 @@ export default function CatalogItem({ title, description, mountain, _createdOn, 
       </p>
 
       <footer>
-        {/* <ul className="stats">
-          <li>
-            <a href="#">General</a>
-          </li>
-          <li>
-            <a href="#" className="icon solid fa-heart">
-              28
-            </a>
-          </li>
-          <li>
-            <a href="#" className="icon solid fa-comment">
-              128
-            </a>
-          </li>
-        </ul> */}
+
       </footer>
     </article>
   )

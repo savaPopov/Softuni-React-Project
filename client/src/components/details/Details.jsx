@@ -9,6 +9,7 @@ import { useForm } from "../../hooks/useForm"
 import { useGetAllComments } from "../../hooks/useComments"
 import { createComment } from "../../api/comments-api"
 import DeleteConfirmationModal from "./deleteConfirmModal/DeleteConfirmationModal"
+import { getAllLikes, like } from "../../api/likes-api"
 
 const initialValues = {
   comment: ''
@@ -22,6 +23,24 @@ export default function Details() {
   const [comments, dispatch] = useGetAllComments(hikeId)
   const [commentErr, setCommentErr] = useState('')
   const [isModalOpen, setModalOpen] = useState(false)
+  const [likes, setLikes] = useState([])
+
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getAllLikes(hikeId)
+      setLikes(result)
+    }
+
+
+    fetchData()
+  }, [])
+
+  async function handleLikes() {
+    const newLike = await like(hikeId)
+    setLikes(state => [...state, newLike])
+  }
 
 
   async function commentHandler({ comment }) {
@@ -31,7 +50,6 @@ export default function Details() {
 
       dispatch({ type: 'ADD_COMMENT', payload: { ...newComment, author: { email } } })
     } catch (err) {
-      //TODO error handling
       setCommentErr(err.message)
     }
   }
@@ -41,16 +59,15 @@ export default function Details() {
   useEffect(() => {
     async function fetchData() {
       const data = await getById(hikeId)
-      // console.log(data)
       setHike(data)
     }
     fetchData()
 
   }, [])
 
+
   const formattedTime = convertTime(hike._createdOn)
 
-  console.log(hike)
 
   async function deleteHandler() {
 
@@ -64,15 +81,13 @@ export default function Details() {
     }
   }
 
-
   const isOwner = userId == hike._ownerId
-  const hasLiked = false;
 
+  let hasLiked = likes.some((x) => x._ownerId == userId)
 
   return (
 
     <div id="main">
-      {/* Post */}
       <article className="post">
         <header>
           <div className="title">
@@ -88,11 +103,6 @@ export default function Details() {
 
               {formattedTime}
             </time>
-            {/* <span className="name">Created by: {email}</span> */}
-            {/* <a href="#" className="author">
-     
-              <img src="images/avatar.jpg" alt="" />
-            </a> */}
           </div>
         </header>
         <span className="image featured">
@@ -113,7 +123,6 @@ export default function Details() {
           <DeleteConfirmationModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} onConfirm={deleteHandler} />
           {isOwner
             ? (
-              //TODO inline btns 
               <div className={styles['inline-buttons']}>
 
                 <h1><Link className={styles.buttonLink} to={`/edit/${hikeId}`}>Edit</Link></h1>
@@ -125,15 +134,15 @@ export default function Details() {
             )
             : isAuthenticated
               ? (hasLiked)
-                ? <h1>You have already Liked this post</h1>
+                ? <h1 className={styles['error-message']}>You have already Liked this post</h1>
                 : (
-                  <h1><a className={styles.buttonLink} href="#">Like</a></h1>
+                  <h1><a className={styles.buttonLink} href="#" onClick={handleLikes}>Like</a></h1>
                 )
               : ''
           }
 
         </span>
-
+        <h2>Likes:{likes.length}</h2>
         <div className="details-comments">
           <h2>Comments:</h2>
 
@@ -180,21 +189,6 @@ export default function Details() {
 
         <footer>
           {<GoogleMaps {...hike} />}
-          {/* <ul className="stats">
-            <li>
-              <a href="#">General</a>
-            </li>
-            <li>
-              <a href="#" className="icon solid fa-heart">
-                28
-              </a>
-            </li>
-            <li>
-              <a href="#" className="icon solid fa-comment">
-                128
-              </a>
-            </li>
-          </ul> */}
         </footer>
 
       </article>

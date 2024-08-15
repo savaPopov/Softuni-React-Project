@@ -9,16 +9,13 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const data = await getAllRecent()
-      // console.log(data)
       setHikes(data)
-
     }
+
     fetchData()
 
-    // console.log(data)
-    // fetchData
   }, [])
-  console.log(hikes)
+
   return (
     <>
       <section className="blurb">

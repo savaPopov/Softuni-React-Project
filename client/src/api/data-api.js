@@ -3,8 +3,8 @@ import { api } from "./requester";
 const BASE_URL = 'http://localhost:3030/data/hikes'
 
 export async function getAllRecent() {
-  const result = await api.get('http://localhost:3030/data/hikes?sortBy=_createdOn%20desc')
-  // const result = await api.get('/data/hikes?sortBy=_createdOn%20desc')
+  const result = await api.get('http://localhost:3030/data/hikes?sortBy=_createdOn%20desc&pageSize=3')
+
 
   const hikes = Object.values(result)
 
@@ -31,7 +31,7 @@ export async function getById(hikeId) {
 
 
 export function create(hikeData) {
-  api.post(BASE_URL, hikeData)
+  return api.post(BASE_URL, hikeData)
 }
 
 export function remove(hikeId) {
@@ -39,7 +39,6 @@ export function remove(hikeId) {
 }
 
 export function update(hikeId, hikeData) {
-  // console.log('hike data from update')
-  // console.log(hikeData)
+
   return api.put(`${BASE_URL}/${hikeId}`, hikeData)
 }

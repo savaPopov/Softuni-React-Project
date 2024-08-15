@@ -12,19 +12,15 @@ export default function Login() {
   const [err, setErr] = useState('')
 
   const loginHandler = async ({ email, password }) => {
-    console.log(email, password)
-    try {
-      //  email = email.trim()
-      //  password = password.trim()
 
+    try {
+      email = email.trim()
+      password = password.trim()
 
       await login(email, password)
       navigate('/')
     } catch (err) {
-      console.log(email, password)
-      values.password = ''
       setErr(err.message)
-      console.log(err.message)
     }
   }
 

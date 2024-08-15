@@ -18,10 +18,8 @@ export function useForm(initialValues, submitCallback, reinitializeForm = false)
 
   const submitHandler = async (e) => {
     e.preventDefault()
-        console.log('values from useForm hook ')
-        console.log(values)
-        await submitCallback(values)
- 
+    await submitCallback(values)
+
   }
 
   return {

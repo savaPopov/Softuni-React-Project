@@ -8,7 +8,6 @@ export default function Search() {
   useEffect(() => {
     async function fetchData() {
       const data = await getAll()
-      // console.log(data)
       setHikes(data)
 
     }
@@ -20,18 +19,19 @@ export default function Search() {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
-    setSearchQuery(e.target.value);
+
+    setSearchQuery(e.target.value)
+
   };
 
-  const filteredData = hikes.filter((hike) =>
-    hike.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredData = searchQuery.length >= 2
+    ? hikes.filter((hike) =>
+      hike.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    : hikes
 
-
-  console.log(filteredData)
   return (
     <>
-      {/* <h2 className={styles['form-search-title']}>Search Recipes</h2> */}
       <div className={styles['form-container']}>
         <form className={styles.form} method="get" name="search-form">
           <h2 className={styles['form-title']}>Search Hikes</h2>

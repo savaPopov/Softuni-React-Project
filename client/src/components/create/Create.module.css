@@ -1,6 +1,5 @@
-
 .form-container {
-  max-width: 1000px; /* Increase max-width for more horizontal space */
+  max-width: 1000px;
   margin: 20px auto;
   padding: 120px;
   background-color: #f2fff0;
@@ -10,7 +9,7 @@
   background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
   background-size: cover;
   background-position: center;
-} 
+}
 
 .form {
   display: flex;
@@ -35,14 +34,20 @@
   color: #2c5f2d;
 }
 
-.form-group input {
-  width: 100%; /* Ensure input fields take up the full width of the form */
+.form-group input{
+  width: 100%;
   padding: 10px;
   border: 1px solid #8b4513;
   border-radius: 4px;
   box-sizing: border-box;
   background-color: #f0f8ff;
   color: #2c5f2d;
+}
+
+.form-group input.errorInput,
+.form-group textarea.errorInput {
+  border-color: #D8000C;
+  background-color: #FFD2D2;
 }
 
 .form-button {
@@ -53,7 +58,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  width: 100%; /* Make the button stretch the full width of the form */
+  width: 100%;
 }
 
 .form-button:hover {

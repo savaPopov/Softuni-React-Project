@@ -4,12 +4,12 @@ import { useEffect } from "react"
 
 
 export default function Logout() {
+
   const logout = useLogout()
-  // console.log(logout)
+
   useEffect(() => {
-   
-      logout()
-  
+
+    logout()
     
   }, [])
 

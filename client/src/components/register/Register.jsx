@@ -13,15 +13,10 @@ export default function Register() {
 
   async function registerHandler(values) {
 
-
-
-
     try {
-
       let password = values.password.trim()
       let repass = values.repass.trim()
       let email = values.email.trim()
-
 
       if (!password || !repass || !email) {
         throw new Error('All fields must be filled ')
@@ -31,16 +26,16 @@ export default function Register() {
         throw new Error('Password Must Match Repass')
       }
 
-      if (password.length <= 3) {
+      if (password.length < 3) {
         throw new Error('Password must be at least 3 charachters')
       }
-
+      console.log(email)
 
       await register(email, password)
       navigate('/')
     } catch (err) {
       setErr(err.message)
-      console.log(err.message)
+
     }
 
   }
