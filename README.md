@@ -23,16 +23,16 @@ A React-based web application for hiking enthusiasts to discover, review, and sh
 ## 📸 Screenshots
 
 <img width="1857" height="958" alt="Create" src="https://github.com/user-attachments/assets/4ea90566-d4c8-41e4-a298-d119135d0fb8" />
-*Form validation and error handling*
+
 
 <img width="1857" height="958" alt="Register" src="https://github.com/user-attachments/assets/e59f6b82-3786-4127-ac4d-636bc42c11a3" />
-*Secure authentication with duplicate user detection*
+
 
 <img width="1857" height="958" alt="Details" src="https://github.com/user-attachments/assets/622e494d-5a1b-42c2-952b-7003b29914aa" />
-*Social features with likes and comments system*
+
 
 <img width="1857" height="958" alt="Catalog" src="https://github.com/user-attachments/assets/da61f925-cd20-4a1c-accd-aebe52ab0eef" />
-*Browse different huts*
+
 
 ## 🚀 Installation
 
