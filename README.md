@@ -19,6 +19,7 @@ A React-based web application for hiking enthusiasts to discover, review, and sh
 - **API Integration:** RESTful services with async/await
 - **Styling:** Custom CSS with responsive design
 - **Architecture:** Component-based with functional components
+- **Maps Integration:** Google Maps API
 
 ## 📸 Screenshots
 
